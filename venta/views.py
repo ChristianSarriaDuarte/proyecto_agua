@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
+import random
+import string
 # Create your views here.
 
 def index(request):
@@ -89,3 +91,34 @@ def signout(request):
 
 def venta_de_agua(request):
     return render(request, 'venta_de_agua.html')
+
+def catalogo(request):
+    return render(request, 'catalogo.html')
+
+def confirmar_compra(request):
+    if request.method == 'POST':
+        # Obtener los datos del carrito
+        orders_data = request.POST.get('orders')
+        orders = eval(orders_data)  # Evaluar la cadena JSON
+
+        for order in orders:
+            # Generar un código de pedido único
+            codigo = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+            # Verificar que el código no exista ya
+            while Pedido.objects.filter(codigo=codigo).exists():
+                codigo = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+            # Crear un nuevo pedido
+            Pedido.objects.create(
+                codigo=codigo,
+                nombre=order['name'],
+                cantidad=order['quantity']
+            )
+        
+        # Limpiar el carrito después de la compra
+        orders.clear()
+
+        return redirect('catalogo')
+
+    return redirect('catalogo')

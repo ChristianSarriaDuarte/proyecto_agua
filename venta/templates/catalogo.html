@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/gestionPedidos.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse nav-container" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="{% url 'index' %}"><img class="img-logo" src="{% static 'images/logo.png' %}" alt=""></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="{% url 'index' %}">Agua Pura</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="{% url 'home' %}">Registrar pedido</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link a-base" aria-current="page" href="{% url 'venta_de_agua' %}">Venta de Agua</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="#">Contacto</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ul-base">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="{% url 'signout' %}">Cerrar sesión</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="{% url 'signin' %}">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link a-base" href="{% url 'signup' %}">Registrarse</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <!-- Header section for the page -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-center flex-grow-1">CATALOGO DE AGUAS</h1>
+            <div class="d-flex align-items-center">
+                <img class="cart-icon" src="{% static 'images/carrito.webp' %}" alt="Carrito de Compras" style="width: 100px; height: 100px;">
+                <span id="cart-item-count" class="badge bg-secondary ms-2">0</span>
+            </div>
+        </div>
+
+        <!-- Cards section -->
+        <div class="row">
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-product-id="1">
+                    <img class="card-img-top" src="{% static 'images/cat_aguanatural.jpg' %}" alt="Agua Natural">
+                    <div class="card-body">
+                        <h5 class="card-title">Agua Natural</h5>
+                        <p class="card-text">Agua natural perfecta para días soleados</p>
+                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-product-id="2">
+                    <img class="card-img-top" src="{% static 'images/cat_aguacongas.jpg' %}" alt="Agua con Gas">
+                    <div class="card-body">
+                        <h5 class="card-title">Agua con Gas</h5>
+                        <p class="card-text">Refrescante y deliciosa</p>
+                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-product-id="3">
+                    <img class="card-img-top" src="{% static 'images/cat_aguasaborizada.webp' %}" alt="Agua Saborizada">
+                    <div class="card-body">
+                        <h5 class="card-title">Agua Saborizada</h5>
+                        <p class="card-text">Todo el sabor frutal concentrado</p>
+                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Items -->
+        <div id="cart-items" class="modal fade" tabindex="-1" aria-labelledby="cartItemsLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartItemsLabel">Pedidos en el carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol id="cart-items-list">
+                            <!-- Cart items will be dynamically added here -->
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="confirmar-compra-form" method="POST" action="{% url 'confirmar_compra' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="orders" id="orders-input">
+                            <button type="submit" class="btn btn-success">Confirmar Compra</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.btn-primary');
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartItemCount = document.getElementById('cart-item-count');
+            const cartItemsList = document.getElementById('cart-items-list');
+            const ordersInput = document.getElementById('orders-input');
+            let orders = [];
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.card');
+                    const productName = card.querySelector('.card-title').textContent;
+                    const productId = card.dataset.productId; // assuming you have a data-product-id attribute
+
+                    // Show quantity input dialog
+                    const quantity = prompt('Ingrese la cantidad (máximo 100):');
+                    if (quantity && !isNaN(quantity) && quantity > 0 && quantity <= 100) {
+                        orders.push({ name: productName, quantity: parseInt(quantity), id: productId });
+
+                        // Update cart item count
+                        cartItemCount.textContent = orders.length;
+
+                        // Clear the quantity input
+                        this.previousElementSibling.querySelector('input').value = '';
+
+                        // Show message and reset form
+                        alert('Pedido agregado al carrito');
+                    } else {
+                        alert('Cantidad inválida. Por favor ingrese un número entre 1 y 100.');
+                    }
+                });
+            });
+
+            // Show cart items on click
+            cartIcon.addEventListener('click', function() {
+                const cartItemsModal = new bootstrap.Modal(document.getElementById('cart-items'));
+                cartItemsList.innerHTML = '';
+
+                orders.forEach(order => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Producto: ${order.name}, Cantidad: ${order.quantity}`;
+                    cartItemsList.appendChild(listItem);
+                });
+
+                // Add orders to hidden input field for form submission
+                ordersInput.value = JSON.stringify(orders);
+
+                // Show cart items modal
+                cartItemsModal.show();
+            });
+        });
+    </script>
+</body>
+</html>
