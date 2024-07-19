@@ -30,6 +30,12 @@
                     <li class="nav-item">
                         <a class="nav-link a-base" href="#">Contacto</a>
                     </li>
+                    <li class="nav-item">
+                        <li class="nav-item">
+                          <a class="nav-link a-base" href="{% url 'buscar_pedido' %}">Buscar pedido</a>
+                        </li>
+                        <a class="nav-link a-base" href="{% url 'catalogo' %}">Catalogo de aguas</a>
+                      </li>
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav ul-base">
@@ -96,7 +102,7 @@
             </div>
         </div>
 
-        <!-- Cart Items -->
+        
         <div id="cart-items" class="modal fade" tabindex="-1" aria-labelledby="cartItemsLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -106,7 +112,7 @@
                     </div>
                     <div class="modal-body">
                         <ol id="cart-items-list">
-                            <!-- Cart items will be dynamically added here -->
+                            
                         </ol>
                     </div>
                     <div class="modal-footer">

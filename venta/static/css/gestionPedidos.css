@@ -198,3 +198,57 @@ footer {
 .space {
     height: 300px;
 }
+
+.form-pedido{
+    width: 30%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 40px;
+}
+
+.form-label-pedido{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: block;
+    text-align: center;
+}
+
+.btn-pedido{
+    width:100%;
+    margin-top: 30px;
+}
+
+.form-control-pedido{
+    text-align: center;
+}
+
+.table-pedido{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.h1-pedido{
+    text-align: center;
+}
+
+h1,h2,h3,p{
+    color: white;
+}
+
+
+body{
+    background-color: #1c232e;
+}
+
+.imagen{
+    width: 64px;
+    height: 64px;
+}
+
+ul li{
+    color: white;
+}

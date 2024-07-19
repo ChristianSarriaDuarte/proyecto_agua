@@ -28,9 +28,12 @@
                   <a class="nav-link a-base" aria-current="page" href="{% url "venta_de_agua" %}">Venta de Agua</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link a-base" href="#">Contacto</a>
+                  <a class="nav-link a-base" href="{% url 'contacto' %}">Contacto</a>
                 </li>
                 <li class="nav-item">
+                  <li class="nav-item">
+                    <a class="nav-link a-base" href="{% url 'buscar_pedido' %}">Buscar pedido</a>
+                  </li>
                   <a class="nav-link a-base" href="{% url 'catalogo' %}">Catalogo de aguas</a>
                 </li>
                 {% endif %}

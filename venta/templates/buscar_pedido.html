@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form class="form-pedido" method="POST">
+        {% csrf_token %}
+        <label for="formGroupExampleInput" class="form-label form-label-pedido">Buscar pedido</label>
+        <input name="buscar" value="{{codigo}}" type="text" class="form-control form-control-pedido" id="formGroupExampleInput" placeholder="Codigo pedido">
+        
+        <button class="btn btn-success btn-block text-white btn-pedido">
+            Buscar
+        </button>
+    </form>
+        {% if pedido is None %}
+            <h1 class="h1-pedido">{{error}}</h1>
+        {% else %}
+            <div class="table-pedido col-sm-12 col-md-6 col-lg-8 col-xl-8">
+                
+                <h1 class="h1-pedido">Pedido encontrado</h1>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Código Pedido</th>
+                                <th>Tipo de Agua</th>
+                                <th>Cantidad Bidones (20 L)</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr>
+                                <td>{{ pedido.codigo }}</td>
+                                <td>{{ pedido.nombre }}</td>
+                                <td>{{ pedido.cantidad }}</td>
+                                <td><a href="/home/edicionPedido/{{pedido.codigo}}" class="btn btn-info">Editar Pedido</a></td>
+                                <td><a href="/home/eliminarPedido/{{pedido.codigo}}" class="btn btn-danger btnEliminacion">Eliminar Pedido</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+        
+{% endblock %}
