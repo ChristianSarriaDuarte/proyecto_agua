@@ -28,7 +28,7 @@
                         <a class="nav-link a-base" aria-current="page" href="{% url 'venta_de_agua' %}">Venta de Agua</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link a-base" href="#">Contacto</a>
+                        <a class="nav-link a-base" href="{% url 'contacto' %}">Contacto</a>
                     </li>
                     <li class="nav-item">
                         <li class="nav-item">
@@ -57,7 +57,7 @@
     </nav>
 
     <div class="container py-4">
-        <!-- Header section for the page -->
+        
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="text-center flex-grow-1">CATALOGO DE AGUAS</h1>
             <div class="d-flex align-items-center">
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <!-- Cards section -->
+        
         <div class="row">
             <div class="col-12 col-md-4 mb-3">
                 <div class="card" style="width: 18rem;" data-product-id="1">
@@ -126,6 +126,38 @@
             </div>
         </div>
     </div>
+
+    <div class="contact">
+        <div class="contact-num">
+            <div>
+                <a href="https://www.whatsapp.com/?lang=es_LA"><img id="whatsapp" src="{% static 'images/whatsapp.png' %}" alt="Icono de whatsapp"></a>
+            </div>
+            <p>+56 9 9568 9345</p>
+            <p>+56 9 0496 9968</p>
+            <p>+56 9 9385 9350</p>
+            <p>+56 9 0693 9349</p>
+        </div>
+        
+        <div class="contact-soc-about">
+            <div class="about">
+                <h2>Nosotros</h2>
+                <a href="#">Sobre nosotros</a>
+                <a href="#">Sucursales</a>
+                <a href="#">Unete a nuestro equipo</a>
+            </div>
+            
+
+            <div class="contact-social">
+                <a href="https://www.facebook.com/?locale=es_LA"><img src="{% static 'images/facebook.png' %}" alt="Icono de facebook"></a>
+                <a href="https://www.instagram.com/"><img src="{% static 'images/instagram.png' %}" alt="Icono de instagram"></a>
+                <a href="https://x.com/?lang=es"><img src="{% static 'images/x.png' %}" alt="Icono de x"></a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+      Todos los derechos reservados &copy; 2024 Miguel Sierra &#9900; Christian Sarria &#9900; Cristobal Hernandez
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

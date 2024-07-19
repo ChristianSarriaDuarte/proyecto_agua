@@ -215,6 +215,7 @@ footer {
     margin-bottom: 20px;
     display: block;
     text-align: center;
+    color: white;
 }
 
 .btn-pedido{
@@ -241,7 +242,7 @@ h1,h2,h3,p{
 
 
 body{
-    background-color: #1c232e;
+    background-color: #3b4452;
 }
 
 .imagen{
@@ -251,4 +252,8 @@ body{
 
 ul li{
     color: white;
+}
+
+.card-text {
+    color: black;
 }
